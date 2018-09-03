@@ -16,6 +16,10 @@ export class StockMainMenuComponent implements OnInit {
  indeterminate = true; 
   stockListInfo:any[];
   isStockAvgVisible=false;
+  sortName = null;
+  sortValue = null;
+  searchAddress: string;
+  listOfSearchName = [];
   checkOptionsOne = [
     { label: 'Apple', value: 'Apple', checked: true },
     { label: 'Pear', value: 'Pear', checked: false },
@@ -23,6 +27,7 @@ export class StockMainMenuComponent implements OnInit {
   ];
   constructor(public stockListProvider:StockListProvider,private modalService: NzModalService) {
     this.stockListInfo=this.stockListProvider.stockListData;
+ 
   }
 
   ngOnInit() {
@@ -427,16 +432,6 @@ updateAllChecked(): void {
     legend: {
       data: ['Stock Average Chart']
      },
-     toolbox: {
-      show : true,
-      feature : {
-          mark : {show: true},
-          dataView : {show: true, readOnly: false},
-          magicType : {show: true, type: ['line', 'bar']},
-          restore : {show: true},
-          saveAsImage : {show: true}
-      }
-  },
   calculable : true,
   grid: {
   left: '8%',
@@ -499,10 +494,30 @@ updateAllChecked(): void {
     console.log('Button ok clicked!');
     this.isStockAvgVisible = false;
   }
-
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isStockAvgVisible = false;
   }
-  
+  showActiveStock():void{
+
+  }
+  showInActiveStock():void{
+
+  }
+
+  sort(sort: { key: string, value: string }): void {
+    this.sortName = sort.key;
+    this.sortValue = sort.value;
+    this.search();
+  }
+  search(): void {
+    /** filter data **/
+    const filterFunc = item => (this.searchAddress ? item.stock_Company.indexOf(this.searchAddress) !== -1 : true) && (this.listOfSearchName.length ? this.listOfSearchName.some(name => item.Stock_date.indexOf(name) !== -1) : true);
+    const data = this.stockListInfo.filter(item => filterFunc(item));
+    /** sort data **/
+    if (this.sortName && this.sortValue) {
+      this.stockListInfo = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[ this.sortName ] > b[ this.sortName ] ? 1 : -1) : (b[ this.sortName ] > a[ this.sortName ] ? 1 : -1));
+    } else {
+      this.stockListInfo = data;
+    }
+  }
 }

@@ -8,7 +8,7 @@
     width:500%;
     height:400px;
 }
-nz-modal{
+[nz-modal]{
     width: 800%;
 }
  
@@ -17,4 +17,35 @@ nz-modal{
     align-items: center;
     justify-content: center;
   }
+
+  .btn-custom{
+      position: relative;
+      border-radius: 15px;
+      background: coral;
+      margin-right: 12px;
+      font-size: 12px;
+  }
+  .btn-stock{
+      background:#fff;
+      position: relative;
+       display: flex;
+       justify-content: flex-end
+  }
+  .list-stock{
+    position: relative;
+     display: flex;
+    justify-content:flex-end; 
+    /* top:-340px;
+    margin-left:auto;
+    margin-right:-40px;  */
+    
+}
+
+.gutter-box {
+    background:#fff;
+    display: flex;
+    justify-content:flex-end; 
+  }
+ 
+ 
    
