@@ -23,7 +23,7 @@
                         </div>
  
                   <!-- Table============Table -->
-                  <nz-table #nzTable [nzData]="tableDataSet" style="width:100%;
+                  <nz-table #smallTable  nzSize="small" nzBordered [nzData]="tableDataSet" style="width:100%;
                   margin: 0 auto;"  [nzScroll]="{ y: '240px' }">
                     <thead>
                       <tr><th class="table-type" nzWidth="40px"   >Type</th>
@@ -42,7 +42,9 @@
                     </tbody>
                   </nz-table>
                   <nz-card>
+                  <nz-table #nzTable [nzData]="tableResultData" [nzPageSize]="10" nzBordered>
 
+                  </nz-table>
                   </nz-card>
                 </div>
               </div>
@@ -96,7 +98,6 @@
             <div nz-col nzSpan="6">
               <div class="gutter-box">
                 <span title style="color:red;">¥2,433,98.00万</span>
-
               </div>
             </div>
           </div>
