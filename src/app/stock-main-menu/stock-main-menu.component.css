@@ -31,20 +31,36 @@
        display: flex;
        justify-content: flex-end
   }
+  .custom-span-value{
+    position: relative;
+    font-size:14px;
+  }
   .list-stock{
     position: relative;
      display: flex;
     justify-content:flex-end; 
-    /* top:-340px;
+     top:-340px;
     margin-left:auto;
-    margin-right:-40px;  */
+    margin-right:-40px;  
+    margin:1px;
     
 }
 
-.gutter-box {
+.tabs-valuation-box {
     background:#fff;
-    display: flex;
-    justify-content:flex-end; 
+    margin: 1px;
+    height: 400px; 
+    text-align:center;
+    font-size:30px;
+  }
+  .company-info-box{
+      background: #fff;
+      text-align: center;
+      top:0px;
+      margin:1px;
+  }
+  .table-type{
+      position: relative;
   }
  
  

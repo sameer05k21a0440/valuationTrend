@@ -25,6 +25,22 @@ export class StockMainMenuComponent implements OnInit {
     { label: 'Pear', value: 'Pear', checked: false },
     { label: 'Orange', value: 'Orange', checked: false }
   ];
+  stock_value =[{value:'¥2,433,98.00万'}]
+  company_Info_Area:any;
+  data =[
+    {title:'Change Buisness Type', company_announce_date:'2018-09-04'},
+    {title:'Change Buisness Type', company_announce_date:'2018-08-01'},
+    {title:'Change Buisness Type', company_announce_date:'2018-02-06'}
+
+  ]
+  tableDataSet=[
+    {type:'Additional Offering',total_price:'300.00',share:'10.0000%',premium:'+12.40%'},
+    {type:'Transfer',total_price:'122.00',share:'10.0000%',premium:'+12.40%'},
+    {type:'Transfer',total_price:'544.00',share:'10.0000%',premium:'+12.40%'},
+    {type:'Bid',total_price:'655.00',share:'01.0000%',premium:'+12.40%'},
+    {type:'Bid',total_price:'1300.00',share:'03.0000%',premium:'+2.40%'},
+    {type:'Bid',total_price:'3000.00',share:'05.0000%',premium:'+1.40%'}
+  ]
   constructor(public stockListProvider:StockListProvider,private modalService: NzModalService) {
     this.stockListInfo=this.stockListProvider.stockListData;
  
@@ -41,7 +57,7 @@ public getStockChart(){
     let myChart = echarts.init (document.getElementById("stock-chart") as HTMLDivElement) ;
       myChart.setOption({
             title : {
-             text: 'Stock Chart',
+             text: 'Total Value',
              subtext: '万元',
              x:'left',
              y:'top',
