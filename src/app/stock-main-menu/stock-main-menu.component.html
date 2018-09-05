@@ -1,151 +1,77 @@
+<!-- /*========= Valuation Layout Main Menu============*/ -->
 <nz-layout>
-    <nz-header style="background:#fff">
-    <!-- <nz-card style="width: 100%;background:#fff;">
-    <nz-card-tab> -->
-    <nz-tabset  nzSize="large" [(nzSelectedIndex)]="index">
-    <nz-tab nzTitle="Valuation Trend">              
-    <nz-content style="background: #fff;padding:0 150px;margin-top:0vh;">
-            <div nz-row nzGutter="48">
-              <div nz-col  nzSpan="16">
-                <div class="tabs-valuation-box">
-                      <div class="btn-stock">
-                          <button nz-button class="btn-custom" nzType="default" (click)="showActiveStock()"><span style="color:white;">Weekly Charts</span></button>
-                          <button nz-button class="btn-custom" nzType="default" (click)="showInActiveStock()"><span style="color:white;">Monthly Charts</span></button>  
-                          </div>
-                      <div style="background:#fff;" id="stock-chart"></div>    
-                </div>
-              </div>
-              <div nz-col nzSpan="8">
-                <div class="tabs-valuation-box">
-                    <div class="btn-stock">
-                        <span title  class="custom-span-value" style="color:red;font-weight: bold;">¥2,433,98.00万</span>
-                        <button nz-button class="btn-custom" nzType="default" (click)="showInActiveStock()"><span style="color:white;font-size: 10px;">↑2.543</span></button>  
-                        </div>
- 
-                  <!-- Table============Table -->
-                  <nz-table #smallTable  nzSize="small" nzBordered [nzData]="tableDataSet" style="width:100%;
-                  margin: 0 auto;"  [nzScroll]="{ y: '240px' }">
-                    <thead>
-                      <tr><th class="table-type" nzWidth="40px"   >Type</th>
-                       <th class="table-type" nzWidth="40px"  >Total Price</th>
-                      <th class="table-type"  nzWidth="40px"  nzLeft="0px" >% Share</th>
-                      <th  class="table-type" nzWidth="40px" nzLeft="0px">Premium</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of tableDataSet">
-                        <td>{{item.type}}</td>
-                        <td>{{item.total_price}}</td>
-                        <td>{{item.share}}</td>
-                        <td>{{item.premium}}</td>
-                      </tr>
-                    </tbody>
-                  </nz-table>
-                  <nz-card>
-                  <nz-table #nzTable [nzData]="tableResultData" [nzPageSize]="10" nzBordered>
-
-                  </nz-table>
-                  </nz-card>
-                </div>
-              </div>
-           
-            </div>
-    </nz-content>
-    </nz-tab>
-    <nz-tab nzTitle="Valuation Details">
-        <nz-content style="background: #fff;padding:0 60px;">
-        <div nz-row nzGutter="48">
-            <div nz-col  nzSpan="16">
-              <div class="tabs-valuation-box">
-                  <div style="text-align: center;background: #fff;padding:0 100px;margin-top:0vh;">
-                      <nz-table  #basicTable  [nzPageSize]="10" [nzData]="stockListInfo">
-                          <thead (nzSortChange)="sort($event)" nzSingleSort>
-                          <tr>
-                            <th nzShowSort nzSortKey="Stock_date">
-                              <span>Date</span>
-                            </th>
-                            <th nzShowSort nzSortKey="stock_Company">
-                              <span>Company Name </span>
-                            </th>
-                            <th nzShowSort nzSortKey="stock_status">
-                                <span>Stock Status </span>
-                              </th>
-                              <th nzShowSort nzSortKey="stock_trading">
-                                  <span>Trading </span>
-                                </th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of stockListInfo">
-                            <td>
-                              {{item.Stock_date}}
-                            </td>
-                            <td>
-                               {{item.stock_Company}}
-                             </td>
-                             <td>
-                                {{item.stock_status}}
-                              </td>
-                              <td>
-                                  {{item.stock_trading}}
-                                </td>
-                            </tr>
-                          </tbody>
-                         </nz-table>
-                  </div>  
-              </div>
-            </div>
-            <div nz-col nzSpan="6">
-              <div class="gutter-box">
-                <span title style="color:red;">¥2,433,98.00万</span>
-              </div>
-            </div>
+ <nz-header style="background:#fff">
+  <nz-tabset  nzSize="large" [nzType]="'line'">
+  <nz-tab nzTitle="Valuation Trend">
+  <nz-content style="background: #fff;padding:0 150px;margin-top:0vh;">
+      <div nz-row  nz-row nzGutter="32" nzType="flex" nzJustify="left">
+          <div nz-col class="gutter-row" nzSpan="16">
+              <div class="btn-stock">
+                  <button nz-button class="btn-custom" nzType="default" (click)="showActiveStock()"><span style="color:white;">Weekly Charts</span></button>
+                  <button nz-button class="btn-custom" nzType="default" (click)="showInActiveStock()"><span style="color:white;">Monthly Charts</span></button>  
+                  </div>
+                <div style="background:#fff;" id="stock-chart"></div>
           </div>
-          </nz-content>
-    </nz-tab>
-      </nz-tabset>
-      <!-- </nz-card-tab>
-      </nz-card> -->
+        </div>
+  </nz-content>
+  </nz-tab>
+  <nz-tab nzTitle="Valuation Details">
+      <nz-content style="background: #fff;padding:0 150px;margin-top:0vh;"> 
+          <div nz-row nzGutter="32" nz-row nzType="flex" nzJustify="left">
+              <div nz-col class="gutter-row" [nzSpan]="16">
+              <!-- /***==Table List ==*/ -->
+              <nz-table  nzBordered  #borderedTable   [nzData]="stockListInfo"  [nzLoading]="loading" [nzTotal]="total"  [(nzPageIndex)]="pageIndex" 
+               [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"(nzPageSizeChange)="searchData(true)">
+               <thead (nzSortChange)="sort($event)" nzSingleSort>
+               <tr>
+               <th nzShowSort nzSortKey="Stock_date">
+                  <span>Date</span>
+                </th>
+                <th nzShowSort nzSortKey="stock_Company">
+                    <span>Company Name </span>
+                  </th>
+                  <th nzShowSort nzSortKey="stock_status">
+                      <span>Stock Status </span>
+                    </th>
+                    <th nzShowSort nzSortKey="stock_trading">
+                        <span>Trading </span>
+                    </th>
+               </tr>
+               </thead>
+               <tbody>
+              <tr *ngFor="let item of stockListInfo">
+                  <td>
+                    {{item.Stock_date}}
+                  </td>
+                  <td>
+                      {{item.stock_Company}}
+                    </td>
+                    <td>
+                      {{item.stock_status}}
+                    </td>
+                    <td>
+                        {{item.stock_trading}}
+                      </td>
+                  </tr>
 
-      <nz-content style="background: #fff;padding:0 150px;margin-top:5vh;">
-          <div nz-row nzGutter="48">
-              <div nz-col [nzSpan]="12"><div class="company-info-box">
-                 <nz-card nzTitle="Company Information" [nzExtra]="extraTemplate">
-                  <textarea row="4" nz-input [(ngModel)]="company_Info_Area"></textarea> 
-                </nz-card>
-              </div></div>
-                 <ng-template #extraTemplate>
-                      <a>More</a>
-                    </ng-template>
-              <div nz-col [nzSpan]="12"><div class="company-info-box">
-                  <nz-card nzTitle="Company Announcement" [nzExtra]="extraTemplate">
-                      <nz-table  nzBordered [nzData]="data">
-                        <tbody>
-                            <tr *ngFor="let data of data">
-                             <td>{{data.title}}</td>
-                             <td>{{data.company_announce_date}}</td>
-                              </tr>
-                        </tbody>
-                      </nz-table>
-                  </nz-card>
-                </div></div>
-                <ng-template #extraTemplate>
-                    <a>More</a>
-                </ng-template>
-            </div>
-          </nz-content>
-    </nz-header>
-    <nz-modal   nzWrapClassName="vertical-center-modal" [(nzVisible)]="isStockAvgVisible"  nzTitle="Stock Average Chart"
-    (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-    <nz-content style="padding:14px; margin-top: 0px;">
-            <div id="stock-avg-chart"></div>
+               </tbody>
+
+              </nz-table>
+              </div>
+          </div>
       </nz-content>
-    </nz-modal>
-    
-
-    <nz-layout style="background:#fff">
-        <nz-sider style="background:#fff">
-          <div>
+      </nz-tab>
+  </nz-tabset>
+</nz-header>
+<nz-modal   nzWrapClassName="vertical-center-modal" [(nzVisible)]="isStockAvgVisible"  nzTitle="Stock Average Chart"
+(nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-content style="padding:14px; margin-top: 0px;">
+        <div id="stock-avg-chart"></div>
+  </nz-content>
+</nz-modal>
+ <nz-layout>
+    <nz-sider style="background:#fff">
+        <div>
             <ul nz-menu [nzMode]="'vertical'" nzTheme='light' [nzInlineCollapsed]="isCollapsed">
                 <li nz-submenu>
                     <span title><i class="anticon anticon-global"></i>All Companies</span>
@@ -199,8 +125,115 @@
                       </li>
             </ul>
           </div> 
-        </nz-sider>
-  </nz-layout> 
-   <nz-footer style="text-align: bottom;">Rongdaitong <i class="anticon anticon-copyright"></i>2018 T&C</nz-footer> 
-  </nz-layout>
+    </nz-sider>
+
+    <nz-content style="background:#fff">
+        <div nz-row     nzType="flex" nzJustify="end" nzAlign="top">
+            <nz-card style="border-style: none;">  
+              <div nz-col [nzSpan]="8"><div class="nzrow-box-1">
+                  <span title  style="color:red;font-weight: bold;width:40px;">¥2,433,98.00万</span>
+              </div></div>
+              <div nz-col [nzSpan]="8"><div class="nzrow-box-2"> </div></div>
+              <div nz-col [nzSpan]="8"><div class="nzrow-box-1"> <button nz-button style="border-radius:
+			          15px;background:red;width:60px;" nzType="default" (click)="showInActiveStock()">
+              <span style="color:white;font-size: 10px;">↑2.543</span></button></div></div>
+             </nz-card>  
+      </div>
+        <!-- <div nz-row      nzType="flex" nzJustify="end" nzAlign="top">
+            <div nz-col  nzSpan="8">
+                <span title  style="color:red;font-weight: bold;width:40px;">¥2,433,98.00万</span>
+              </div>
+              <div nz-col   nzSpan="6">
+                  <button nz-button style="border-radius:
+			          15px;background:red;width:60px;" nzType="default" (click)="showInActiveStock()">
+              <span style="color:white;font-size: 10px;">↑2.543</span></button>
+                </div>
+          </div> -->
+       
+          <div nz-row     nzType="flex" nzJustify="end">
+              <div nz-col nzSpan="6">
+                  <nz-table #smallTable  nzSize="small" nzBordered [nzData]="tableDataSet" style="width:100%;
+                  margin: 0 auto; border-style: none;"  [nzScroll]="{ y: '240px' }">
+                    <thead>
+                      <tr><th class="table-type" nzWidth="40px"   >Type</th>
+                       <th class="table-type" nzWidth="40px"  >Total Price</th>
+                      <th class="table-type"  nzWidth="40px"  nzLeft="0px" >% Share</th>
+                      <th  class="table-type" nzWidth="40px" nzLeft="0px">Premium</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of tableDataSet">
+                        <td>{{item.type}}</td>
+                        <td>{{item.total_price}}</td>
+                        <td>{{item.share}}</td>
+                        <td>{{item.premium}}</td>
+                      </tr>
+                    </tbody>
+                  </nz-table>
+                </div>
+           
+                
+                 
+            </div>
+
+            <!-- <div nz-row     nzType="flex" nzJustify="end">
+                  <nz-card>  
+                    <div nz-col [nzSpan]="6"><div class="nzrow-box-1">
+                      <!-- /*---List Added-*/ -->
+                        <!-- <button nz-button class="btn-custom-bid" nzType="default" (click)="showActiveStock()"><span style="color:white;">Bid</span></button> -->
+                    <!-- </div></div> -->
+                    <!-- <div nz-col [nzSpan]="8"><div class="nzrow-box-2"><label title>Holder</label></div></div>
+                    <div nz-col [nzSpan]="8"><div class="nzrow-box-1"><span>1000.00%</span></div></div> -->
+                   <!-- </nz-card>  
+            </div> --> 
+
+
   
+
+         
+
+
+        
+      <div nz-row nzType="flex" nzJustify="start" >
+        <div nz-col nzSpan="8">
+            <nz-card nzTitle="Company Information" [nzExtra]="extraTemplate">
+                <textarea row="4" nz-input [(ngModel)]="company_Info_Area"></textarea> 
+              </nz-card>
+        </div>
+        <ng-template #extraTemplate>
+            <a>More</a>
+        </ng-template>
+        <div nz-col nzSpan="8">    
+          <nz-card nzTitle="Company Announcement" [nzExtra]="extraTemplate">
+            <nz-table  nzBordered [nzData]="data">
+              <tbody>
+                  <tr *ngFor="let data of data">
+                   <td>{{data.title}}</td>
+                   <td>{{data.company_announce_date}}</td>
+                    </tr>
+              </tbody>
+            </nz-table>
+        </nz-card></div>
+        <ng-template #extraTemplate>
+            <a>More</a>
+        </ng-template>
+      </div>
+            
+    </nz-content> 
+
+    <!-- <nz-content>
+        <div  nz-row [nzGutter]="40" nzType="flex" nzJustify="end">
+            <div nz-col [nzSpan]="8"><div class="nzrow-box-1">
+                <button nz-button class="btn-custom-bid" nzType="default" (click)="showActiveStock()"><span style="color:white;">Bid</span></button>
+            </div></div>
+            <div nz-col [nzSpan]="8"><div class="nzrow-box-2"><label title>Holder</label></div></div>
+            <div nz-col [nzSpan]="8"><div class="nzrow-box-1"><span>1000.00%</span></div></div>
+          </div>
+    </nz-content> -->
+   
+ </nz-layout>
+<div class="custom-layout-footer">
+ <nz-footer>Footer</nz-footer>
+</div>
+
+</nz-layout>

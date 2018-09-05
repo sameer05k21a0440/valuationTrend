@@ -18,6 +18,7 @@ export class StockMainMenuComponent implements OnInit {
   isStockAvgVisible=false;
   sortName = null;
   sortValue = null;
+  sortKey = null;
   searchAddress: string;
   listOfSearchName = [];
   checkOptionsOne = [
@@ -41,6 +42,12 @@ export class StockMainMenuComponent implements OnInit {
     {type:'Bid',total_price:'1300.00',share:'03.0000%',premium:'+2.40%'},
     {type:'Bid',total_price:'3000.00',share:'05.0000%',premium:'+1.40%'}
   ]
+  tableResultData=[
+    {value:'Holder',result:'1000.00%'}
+  ]
+  pageIndex = 1;
+  pageSize = 10;
+  total = 1;
   constructor(public stockListProvider:StockListProvider,private modalService: NzModalService) {
     this.stockListInfo=this.stockListProvider.stockListData;
  
@@ -63,8 +70,7 @@ public getStockChart(){
              y:'top',
               textStyle:{
                  fontSize: 14,
-                 fontWeight: 600,
-                 
+                 fontWeight: 600
               },
          },
             tooltip : {
@@ -82,15 +88,20 @@ public getStockChart(){
              itemHeight: 14,            // 图例图形高度
              data: ['N',  'P', 'T', 'R']
          },
-         toolbox: {
-             show : true,
-             feature : {
-                 mark : {show: true},
-                 dataView : {show: true, readOnly: false},
-                 magicType : {show: true, type: ['line', 'bar']},
-                 restore : {show: true},
-                 saveAsImage : {show: true}
-             }
+         toolbox: {  
+           show:true,
+           orient: 'horizontal', 
+           padding: 4,              
+           showTitle: true,
+             x: 'right',
+             y:'top', 
+             feature: {
+              dataView: { show: true,title : '数据视图'},// data view
+              magicType: {show : true,  title : { line : '动态类型切换-折线图', bar : '动态类型切换-柱形图',}, type: ['bar','line']},// dynamic type switch 
+              restore: { show: true,title : '还原'},// reset
+              saveAsImage: {show: true,  title : '保存为图片',  type : 'jpeg'} // Save the image
+             
+          }
          },
          calculable : true,
          grid: {
